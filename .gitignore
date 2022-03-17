@@ -3,3 +3,5 @@
 
 # R
 *.Rproj
+*.Rdata
+Scripts/.Rproj.user
