@@ -16,7 +16,7 @@ data <- read_csv("C:/Users/T-Gamer/Google Drive/Estudos/Pesquisa/Avaliação de 
 
 # preprocessing
 data$error <- as.numeric(sub(",", ".", sub("%","",data$error)))/100
-data_error$error <- as.numeric(sub(",", ".", sub("%","",data_error$error)))/100
+data_stress$error <- as.numeric(sub(",", ".", sub("%","",data_stress$error)))/100
 
 # 1. consistencia/tempo resposta/usuarios ----
 chart1_data <- data
@@ -56,7 +56,6 @@ ggplot(data=chart2_data_aux, aes(x=users, y=average, fill=interval)) +
   geom_bar(stat="identity", width=5, position="dodge", color="black") +
   xlab("Concurrent users") + 
   ylab("Response time (ms)") +
-  labs(fill = "Interval time") +
   scale_fill_manual(values=c("#ffffff", "#aba9a9", "#252625"))+
   theme(text = element_text(size=18)) +
   geom_col_pattern(
@@ -88,7 +87,9 @@ ggplot(data=chart3_data_aux, aes(x=users, y=average, fill=lines)) +
   theme(text = element_text(size=18))
 
 ggplot(chart3_data_aux, aes(x = users, y = average)) + 
-  geom_line(aes(color = size, linetype = size))
+  geom_line(aes(color = lines, linetype = lines), size=2) +
+  scale_linetype_manual(values=c("twodash", "dotted", "solid"))+
+  scale_color_manual(values=c("#aba9a9", "#363636", "#252625"))
 
 
 
@@ -106,7 +107,11 @@ ggplot(data=chart4_data_aux, aes(x=lines, y=average, fill=consistency)) +
   theme(text = element_text(size=18))
 
 ggplot(chart4_data_aux, aes(x = lines, y = average)) + 
-  geom_line(aes(color = consistency, linetype = consistency), size=1)
+  geom_line(aes(color = consistency, linetype = consistency), size=2) +
+  ylab("Response time (ms)") +
+  xlab("Lines") + 
+  scale_linetype_manual(values=c("twodash", "dotted", "solid"))+
+  scale_color_manual(values=c("#aba9a9", "#363636", "#252625"))
 
 
 # 5. consistencia/erro/usuarios ----
@@ -132,13 +137,21 @@ ggplot(data=chart6_data_aux, aes(x=users, y=error, fill=lines)) +
   geom_bar(stat="identity", width=5, position="dodge", color="black") +
   xlab("Concurrent users") + 
   ylab("Error (%)") +
-  labs(fill = "Size") +
-  #scale_fill_manual(values=c("#ffffff", "#aba9a9", "#252625"))+
-  theme(text = element_text(size=18))
+  scale_fill_manual(values=c("#ffffff", "#aba9a9", "#252625"))+
+  theme(text = element_text(size=18)) +
+  geom_col_pattern(
+    aes(pattern = lines),
+    colour = "black",
+    pattern_fill = "black",
+    pattern_angle = 45,
+    pattern_density = 0.1,
+    pattern_spacing = 0.01,
+    position = position_dodge2(preserve = 'single'),
+  )
 
 
 # 7. consistencia/erro/usuarios (STRESS) ----
-chart1stress_data <- data_error
+chart1stress_data <- data_stress
 chart1stress_data$consistency <- factor(chart1stress_data$consistency,levels=c("ONE","QUORUM","ALL"), ordered=T)
 chart1stress_data_aux <- chart1stress_data %>% group_by(consistency,users) %>% summarise(error=mean(error))
 
@@ -147,7 +160,7 @@ ggplot(data=chart1stress_data_aux, aes(x=users, y=error, fill=consistency)) +
   xlab("Concurrent users") + 
   ylab("Response time (ms)")
 
-ggplot(data=chart1stress_data_aux, aes(x=users, y=average, fill=consistency)) + 
+ggplot(data=chart1stress_data_aux, aes(x=users, y=error, fill=consistency)) + 
   geom_bar(stat="identity", width=5, position="dodge", color="black") +
   xlab("Concurrent users") + 
   ylab("Response time (ms)") +
@@ -159,4 +172,20 @@ ggplot(data=chart1stress_data_aux, aes(x=users, y=average, fill=consistency)) +
 # 8. ./erro-tempo/usuarios (STRESS) ----
 
 
-# 9. consistencia/erro/usuarios (STRESS) ----
+# 9. consistencia/throughput/usuarios (STRESS) ----
+chart3stress_data <- data_stress
+chart3stress_data$consistency <- factor(chart3stress_data$consistency,levels=c("ONE","QUORUM","ALL"), ordered=T)
+chart3stress_data_aux <- chart3stress_data %>% group_by(consistency,users) %>% summarise(throughput=mean(throughput))
+
+ggplot(data=chart3stress_data_aux, aes(x=users, y=throughput, fill=consistency)) + 
+  geom_point() +
+  xlab("Concurrent users") + 
+  ylab("Response time (ms)")
+
+ggplot(data=chart3stress_data_aux, aes(x=users, y=throughput, fill=consistency)) + 
+  geom_bar(stat="identity", width=5, position="dodge", color="black") +
+  xlab("Concurrent users") + 
+  ylab("Response time (ms)") +
+  labs(fill = "Consistency level") +
+  scale_fill_manual(values=c("#ffffff", "#aba9a9", "#252625"))+
+  theme(text = element_text(size=18))

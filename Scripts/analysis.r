@@ -28,4 +28,5 @@ summary(data.aov)
 TukeyHSD(data.aov)
 
 # Teste não-paramétrico
-friedman.test(y=data$average, groups=data$consistency, blocks=data$name)
+data_aux <- data[data$lines==5000 & data$users==30 & data$interval==500,]
+friedman.test(y=data_aux$average, groups=data_aux$consistency, blocks=data_aux$name)
