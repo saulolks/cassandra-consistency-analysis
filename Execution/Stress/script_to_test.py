@@ -18,7 +18,7 @@ for i in range(len):
     command = ""
     command = \
         r"C:\Users\T-Gamer\Documents\apache-jmeter-5.4.1\apache-jmeter-5.4.1\bin\jmeter " + \
-        r"-n -t .\stress-cassandra.jmx -l " + r"results\test008.jtl " + \
+        r"-n -t .\stress-cassandra.jmx -l " + r"results\test009.jtl " + \
         f"-Jname=test_{tests['id'][i]} -Jlifetime={tests['duration'][i]} " + \
         f"-Jusers={tests['users'][i]} -Jlines={tests['lines'][i]} -Jconsistency={tests['consistency'][i]}"
 

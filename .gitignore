@@ -7,3 +7,4 @@
 Scripts/.Rproj.user
 
 # Jmeter
+*.log
