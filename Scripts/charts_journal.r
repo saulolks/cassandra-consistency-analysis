@@ -16,7 +16,8 @@ data <- read_csv("C:/Users/T-Gamer/Google Drive/Estudos/Pesquisa/Avaliação de 
 
 # preprocessing
 data$error <- as.numeric(sub(",", ".", sub("%","",data$error)))/100
-data_stress$error <- as.numeric(sub(",", ".", sub("%","",data_stress$error)))/100
+data_stress$error <- as.numeric(sub(",", ".", sub("%","",data_stress$error)))
+data_stress$error <- as.numeric(sub(",", ".", data_stress$error))
 
 # 1. consistencia/tempo resposta/usuarios ----
 chart1_data <- data
@@ -153,14 +154,14 @@ ggplot(data=chart6_data_aux, aes(x=users, y=error, fill=lines)) +
 # 7. consistencia/erro/usuarios (STRESS) ----
 chart1stress_data <- data_stress
 chart1stress_data$consistency <- factor(chart1stress_data$consistency,levels=c("ONE","QUORUM","ALL"), ordered=T)
-chart1stress_data_aux <- chart1stress_data %>% group_by(consistency,users) %>% summarise(error=mean(error))
+chart1stress_data_aux <- chart1stress_data %>% group_by(users) %>% summarise(error=mean(error), average=mean(average))
 
 ggplot(data=chart1stress_data_aux, aes(x=users, y=error, fill=consistency)) + 
   geom_point() +
   xlab("Concurrent users") + 
   ylab("Response time (ms)")
 
-ggplot(data=chart1stress_data_aux, aes(x=users, y=error, fill=consistency)) + 
+ggplot(data=chart1stress_data, aes(x=users, y=error, fill=consistency)) + 
   geom_bar(stat="identity", width=5, position="dodge", color="black") +
   xlab("Concurrent users") + 
   ylab("Response time (ms)") +
@@ -168,6 +169,16 @@ ggplot(data=chart1stress_data_aux, aes(x=users, y=error, fill=consistency)) +
   scale_fill_manual(values=c("#ffffff", "#aba9a9", "#252625"))+
   theme(text = element_text(size=18))
 
+
+ggplot(data=chart1stress_data, aes=(x=users)) +
+  geom_line(aes(x=users,y=average)) +
+  geom_line(aes(x=users,y=error, size=2)) +
+  scale_y_continuous(name="Average response time", sec.axis = sec_axis(trans=~./10000, name="Error rate"))
+
+ggplot() +
+  geom_bar(data=chart1stress_data_aux, aes(y=average, fill=users)) +
+  geom_line(data=chart1stress_data_aux, aes(x=users,y=error, size=2)) +
+  scale_y_continuous(name="Average response time", sec.axis = sec_axis(trans=~./5000, name="Error rate"))
 
 # 8. ./erro-tempo/usuarios (STRESS) ----
 
@@ -189,3 +200,17 @@ ggplot(data=chart3stress_data_aux, aes(x=users, y=throughput, fill=consistency))
   labs(fill = "Consistency level") +
   scale_fill_manual(values=c("#ffffff", "#aba9a9", "#252625"))+
   theme(text = element_text(size=18))
+
+
+# LAB -----
+library(ggplot2)
+
+data1 <- data_stress %>% filter(consistency == "ALL")
+data1$error <- 100*data1$error
+ggp <- ggplot(data1)  + 
+  geom_bar(aes(x=users, y=average),stat="identity", fill="cyan",colour="#006000")+
+  geom_line(aes(x=users, y=100*error),stat="identity",color="red",size=2)+
+  labs(title= "Stress error and average time to respond",
+       x="Year",y="Average response time")+
+  scale_y_continuous(sec.axis=sec_axis(~.*0.01,name="Error rate"))
+ggp
