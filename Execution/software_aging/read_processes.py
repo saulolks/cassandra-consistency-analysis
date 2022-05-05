@@ -23,11 +23,11 @@ while True:
     print ("Current time:", str(currentDT))
     
     output = os.popen('sudo docker exec -it cas1 ps -auxf | awk \'{print $1 "," $2 "," $3 "," $4 "," $5 "," $6 "," $11}\'').read()
-    file = open('processes/ProcessesInformation_{0}_{1}.txt'.format(aux, str(currentDT)),'w')
+    file = open('processes/002/ProcessesInformation_{0}_{1}.txt'.format(aux, str(currentDT)),'w')
     file.write(output)
     file.close()
     
     #time.sleep(3600) #Espera 1 hora para coletar novamente
     aux = aux + 1 
-    time.sleep(1) 
+    time.sleep(300) 
 

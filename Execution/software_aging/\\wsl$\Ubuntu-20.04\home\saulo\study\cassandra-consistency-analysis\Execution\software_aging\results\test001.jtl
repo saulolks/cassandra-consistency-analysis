@@ -1,0 +1,47 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1651626568670,585,Open connection sampler,500,"javax.script.ScriptException: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+Script1.groovy: 1: unable to resolve class com.datastax.driver.core.Cluster
+ @ line 1, column 1.
+   import com.datastax.driver.core.Cluster;
+   ^
+
+Script1.groovy: 2: unable to resolve class com.datastax.driver.core.Session
+ @ line 2, column 1.
+   import com.datastax.driver.core.Session;
+   ^
+
+Script1.groovy: 3: unable to resolve class com.datastax.driver.core.QueryOptions
+ @ line 3, column 1.
+   import com.datastax.driver.core.QueryOptions;
+   ^
+
+Script1.groovy: 4: unable to resolve class com.datastax.driver.core.ConsistencyLevel
+ @ line 4, column 1.
+   import com.datastax.driver.core.ConsistencyLevel;
+   ^
+
+4 errors
+",setUp Thread Group 1-1,text,false,,0,0,1,1,null,0,0,0
+1651626579499,542,Open connection sampler,500,"javax.script.ScriptException: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
+Script1.groovy: 1: unable to resolve class com.datastax.driver.core.Cluster
+ @ line 1, column 1.
+   import com.datastax.driver.core.Cluster;
+   ^
+
+Script1.groovy: 2: unable to resolve class com.datastax.driver.core.Session
+ @ line 2, column 1.
+   import com.datastax.driver.core.Session;
+   ^
+
+Script1.groovy: 3: unable to resolve class com.datastax.driver.core.QueryOptions
+ @ line 3, column 1.
+   import com.datastax.driver.core.QueryOptions;
+   ^
+
+Script1.groovy: 4: unable to resolve class com.datastax.driver.core.ConsistencyLevel
+ @ line 4, column 1.
+   import com.datastax.driver.core.ConsistencyLevel;
+   ^
+
+4 errors
+",setUp Thread Group 1-1,text,false,,0,0,1,1,null,0,0,0

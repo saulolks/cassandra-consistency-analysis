@@ -9,7 +9,7 @@
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments"/>
       </elementProp>
-      <stringProp name="TestPlan.user_define_classpath">\\wsl$\Ubuntu-20.04\home\sauloferreira\study\cassandra-consistency-analysis\Config\jmeter dependencies\HdrHistogram-2.1.4.jar,\\wsl$\Ubuntu-20.04\home\sauloferreira\study\cassandra-consistency-analysis\Config\jmeter dependencies\cassandra-driver-core-3.3.0.jar,\\wsl$\Ubuntu-20.04\home\sauloferreira\study\cassandra-consistency-analysis\Config\jmeter dependencies\guava-19.0.jar,\\wsl$\Ubuntu-20.04\home\sauloferreira\study\cassandra-consistency-analysis\Config\jmeter dependencies\lz4-1.2.0.jar,\\wsl$\Ubuntu-20.04\home\sauloferreira\study\cassandra-consistency-analysis\Config\jmeter dependencies\metrics-core-3.0.0.jar,\\wsl$\Ubuntu-20.04\home\sauloferreira\study\cassandra-consistency-analysis\Config\jmeter dependencies\netty-buffer-4.0.33.Final.jar,\\wsl$\Ubuntu-20.04\home\sauloferreira\study\cassandra-consistency-analysis\Config\jmeter dependencies\netty-codec-4.0.33.Final.jar,\\wsl$\Ubuntu-20.04\home\sauloferreira\study\cassandra-consistency-analysis\Config\jmeter dependencies\netty-common-4.0.33.Final.jar,\\wsl$\Ubuntu-20.04\home\sauloferreira\study\cassandra-consistency-analysis\Config\jmeter dependencies\netty-handler-4.0.33.Final.jar,\\wsl$\Ubuntu-20.04\home\sauloferreira\study\cassandra-consistency-analysis\Config\jmeter dependencies\netty-transport-4.0.33.Final.jar,\\wsl$\Ubuntu-20.04\home\sauloferreira\study\cassandra-consistency-analysis\Config\jmeter dependencies\snappy-java-1.0.5-M1.jar</stringProp>
+      <stringProp name="TestPlan.user_define_classpath">\\wsl$\Ubuntu-20.04\home\saulo\study\cassandra-consistency-analysis\Config\jmeter dependencies\HdrHistogram-2.1.4.jar,\\wsl$\Ubuntu-20.04\home\saulo\study\cassandra-consistency-analysis\Config\jmeter dependencies\cassandra-driver-core-3.3.0.jar,\\wsl$\Ubuntu-20.04\home\saulo\study\cassandra-consistency-analysis\Config\jmeter dependencies\guava-19.0.jar,\\wsl$\Ubuntu-20.04\home\saulo\study\cassandra-consistency-analysis\Config\jmeter dependencies\lz4-1.2.0.jar,\\wsl$\Ubuntu-20.04\home\saulo\study\cassandra-consistency-analysis\Config\jmeter dependencies\metrics-core-3.0.0.jar,\\wsl$\Ubuntu-20.04\home\saulo\study\cassandra-consistency-analysis\Config\jmeter dependencies\netty-buffer-4.0.33.Final.jar,\\wsl$\Ubuntu-20.04\home\saulo\study\cassandra-consistency-analysis\Config\jmeter dependencies\netty-codec-4.0.33.Final.jar,\\wsl$\Ubuntu-20.04\home\saulo\study\cassandra-consistency-analysis\Config\jmeter dependencies\netty-common-4.0.33.Final.jar,\\wsl$\Ubuntu-20.04\home\saulo\study\cassandra-consistency-analysis\Config\jmeter dependencies\netty-handler-4.0.33.Final.jar,\\wsl$\Ubuntu-20.04\home\saulo\study\cassandra-consistency-analysis\Config\jmeter dependencies\netty-transport-4.0.33.Final.jar,\\wsl$\Ubuntu-20.04\home\saulo\study\cassandra-consistency-analysis\Config\jmeter dependencies\snappy-java-1.0.5-M1.jar</stringProp>
     </TestPlan>
     <hashTree>
       <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
@@ -83,7 +83,7 @@
             <connectTime>true</connectTime>
           </value>
         </objProp>
-        <stringProp name="filename"></stringProp>
+        <stringProp name="filename">\\wsl$\Ubuntu-20.04\home\saulo\study\cassandra-consistency-analysis\Execution\software_aging\results\test002.jtl</stringProp>
       </ResultCollector>
       <hashTree/>
       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -108,37 +108,39 @@
           </elementProp>
           <elementProp name="rowsQuantity" elementType="Argument">
             <stringProp name="Argument.name">rowsQuantity</stringProp>
-            <stringProp name="Argument.value">${__P(lines)}</stringProp>
-            <stringProp name="Argument.desc">Número de linhas retornadas</stringProp>
+            <stringProp name="Argument.value">10000</stringProp>
+            <stringProp name="Argument.desc">${__P(lines)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="consistency" elementType="Argument">
             <stringProp name="Argument.name">consistency</stringProp>
-            <stringProp name="Argument.value">${__P(consistency)}</stringProp>
+            <stringProp name="Argument.value">ONE</stringProp>
             <stringProp name="Argument.desc">${__P(consistency)}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="lifeTime" elementType="Argument">
             <stringProp name="Argument.name">lifeTime</stringProp>
-            <stringProp name="Argument.value">${__P(lifetime)}</stringProp>
+            <stringProp name="Argument.value">3600</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
-            <stringProp name="Argument.desc">Tempo de vida das threads</stringProp>
+            <stringProp name="Argument.desc">${__P(lifetime)}</stringProp>
           </elementProp>
           <elementProp name="delay" elementType="Argument">
             <stringProp name="Argument.name">delay</stringProp>
             <stringProp name="Argument.value">30</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
-            <stringProp name="Argument.desc">180</stringProp>
+            <stringProp name="Argument.desc">30</stringProp>
           </elementProp>
           <elementProp name="name" elementType="Argument">
             <stringProp name="Argument.name">name</stringProp>
-            <stringProp name="Argument.value">${__P(name)}</stringProp>
+            <stringProp name="Argument.value">test_01</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">${__P(name)}</stringProp>
           </elementProp>
           <elementProp name="users" elementType="Argument">
             <stringProp name="Argument.name">users</stringProp>
-            <stringProp name="Argument.value">${__P(users)}</stringProp>
+            <stringProp name="Argument.value">50</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
+            <stringProp name="Argument.desc">${__P(users)}</stringProp>
           </elementProp>
         </collectionProp>
       </Arguments>
@@ -1014,7 +1016,7 @@ session.execute(query.bind());</stringProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">9</stringProp>
+          <stringProp name="LoopController.loops">100</stringProp>
         </elementProp>
         <stringProp name="ThreadGroup.num_threads">100</stringProp>
         <stringProp name="ThreadGroup.ramp_time">1</stringProp>

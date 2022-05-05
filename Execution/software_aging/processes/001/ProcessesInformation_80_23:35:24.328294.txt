@@ -1,0 +1,3 @@
+USER,PID,%CPU,%MEM,VSZ,RSS,COMMAND
+root,9391,0.0,0.0,8892,3100,ps
+cassand+,1,13.0,34.8,4210304,2234864,/opt/java/openj
