@@ -8,3 +8,6 @@ Scripts/.Rproj.user
 
 # Jmeter
 *.log
+
+# npm
+node_modules/
