@@ -1,0 +1,5 @@
+cassandra_driver==3.25.0
+locustio==0.999
+python-dotenv==0.20.0
+pandas==1.4.2
+progress==1.6

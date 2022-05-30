@@ -28,8 +28,9 @@ class CassandraClient(object):
 
     def __init__(self, host, consistency_level):
         self.consistency_level = consistency_level
-        cluster = Cluster([host], port=9042)
+        cluster = Cluster([host], port=9042, load_balancing_policy=RoundRobinPolicy())
         self.session = cluster.connect("testvalidation")
+        self.session.default_timeout = 15
         load_dotenv()
     
     def execute(self, query, name=None):
