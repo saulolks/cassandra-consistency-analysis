@@ -1,0 +1,4 @@
+id,users,duration,lines,consistency
+low,10,14400,1000,ONE
+medium,50,14400,5000,ONE
+high,100,14400,10000,ONE

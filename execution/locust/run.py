@@ -1,13 +1,25 @@
+"""
+@author: sauloferreira
+
+args:
+1. test-type: description of the tests for identification purposes (stress, software_aging or analysis)
+2. scenario: path to the scenario
+
+example:
+    python run.py --test-type=software_aging --scenario=scenarios/software_aging/scenario_high.csv
+"""
+
+from progress.bar import Bar
+import argparse
+import datetime
 import os
 import pandas as pd
-import argparse
-from progress.bar import Bar
-import datetime
+import time
 
 parser = argparse.ArgumentParser(description="Cassandra Locust Test", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
 parser.add_argument("--scenario", help="Path to the CSV scenario file")
-parser.add_argument("--test-type", help="Type of the test: software-aging, stress or analysis")
+parser.add_argument("--test-type", help="Type of the test: software_aging, stress or analysis")
 
 args = parser.parse_args()
 config = vars(args)

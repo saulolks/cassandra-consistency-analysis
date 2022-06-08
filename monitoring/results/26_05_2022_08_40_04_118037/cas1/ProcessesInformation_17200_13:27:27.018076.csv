@@ -1,3 +1,0 @@
-USER,PID,%CPU,%MEM,VSZ,RSS,COMMAND
-root,47755,0.0,0.0,8896,3156,ps
-cassand+,1,84.8,4.0,3102232,1332660,/opt/java/ope

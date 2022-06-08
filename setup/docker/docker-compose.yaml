@@ -1,9 +1,12 @@
-version: "3"
+version: "2.2"
 
 services:
   node_1:
     container_name: mycassandra1
     image: cassandra:4.0.4
+    mem_limit: 4096M
+    mem_reservation: 2048M
+    cpuset: "0,1"
     ports:
       - 9042:9042
     volumes:
@@ -14,21 +17,5 @@ services:
       - CASSANDRA_DC=datacenter1
       - CASSANDRA_RACK=Rack1
       - CASSANDRA_ENDPOINT_SNITCH=GossipingPropertyFileSnitch
-      - HEAP_NEWSIZE=1g
-      - MAX_HEAP_SIZE=2g
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "cqlsh",
-          "-e",
-          "select count(*) from testvalidation.sampletable"
-        ]
-      interval: 5s
-      timeout: 5s
-      retries: 60
-    deploy:
-      resources:
-        limits:
-          cpus: "2"
-          memory: "4g"
+      - HEAP_NEWSIZE=512M
+      - MAX_HEAP_SIZE=1024M

@@ -22,15 +22,15 @@ class SimpleUser(CassandraLocust):
         self.client.execute(query, f"[READ] {test_name}")
 
 
-class PopulateUser(CassandraLocust):
-    min_wait = 10
-    max_wait = 500
-    host = "localhost"
+# class PopulateUser(CassandraLocust):
+#     min_wait = 10
+#     max_wait = 500
+#     host = "localhost"
 
-    @task
-    def select_task(self):
-        test_name = self.environment.parsed_options.test_name
+#     @task
+#     def select_task(self):
+#         test_name = self.environment.parsed_options.test_name
 
-        id = random.randint(1, 1000000000)
-        query = f"insert into testvalidation.sampletable (\"identifier\", \"column1\", \"column2\", \"column3\", \"column4\", \"column5\", \"column6\", \"column7\", \"column8\", \"column9\", \"column10\") values ('{id}', 'teste', 'teste', 'teste', 'teste', 'teste', 'teste', 'teste', 'teste', 'teste', 'teste');"
-        self.client.execute(query, f"[WRITE] {test_name}")
+#         id = random.randint(1, 1000000000)
+#         query = f"insert into testvalidation.sampletable (\"identifier\", \"column1\", \"column2\", \"column3\", \"column4\", \"column5\", \"column6\", \"column7\", \"column8\", \"column9\", \"column10\") values ('{id}', 'teste', 'teste', 'teste', 'teste', 'teste', 'teste', 'teste', 'teste', 'teste', 'teste');"
+#         self.client.execute(query, f"[WRITE] {test_name}")

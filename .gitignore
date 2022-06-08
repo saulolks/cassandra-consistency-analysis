@@ -11,3 +11,6 @@ Scripts/.Rproj.user
 
 # npm
 node_modules/
+
+# folders
+trash/

@@ -1,0 +1,4 @@
+Method,Name,Error,Occurrences
+query,[READ] 1,"('Unable to complete the operation against any hosts', {})",19622
+query,[READ] 1,"('Unable to complete the operation against any hosts', {<Host: 127.0.0.1:9042 datacenter1>: ConnectionShutdown('Connection to 127.0.0.1:9042 is closed')})",7
+query,[READ] 1,"('Unable to complete the operation against any hosts', {<Host: 127.0.0.1:9042 datacenter1>: ConnectionException('Host has been marked down or removed')})",361
