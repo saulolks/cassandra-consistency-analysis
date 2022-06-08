@@ -1,3 +1,4 @@
+from tkinter import Y
 from turtle import title
 from black import main
 import plotly.graph_objects as go
@@ -9,31 +10,58 @@ class MonitoringPlotter:
     def __init__(self) -> None:
         pass
 
-    def multiline_plot(self, data: dict, x_axis: str, y_axises: list) -> None:
+    def multiline_plot(self, data: dict, x_axis: str, y_axises: list, file_path: str = None) -> None:
         if len(y_axises) < 2:
-            raise ValueError
+            raise ValueError("At least two y-axises are required")
 
         fig = go.Figure()
-        fig.add_trace(go.Scatter(x=data[x_axis], y=data[y_axises[0]], name=y_axises[0], mode="lines"))
 
-        for y_axis in y_axises[1:]:
+        for y_axis in y_axises:
             fig.add_trace(go.Scatter(x=data[x_axis], y=data[y_axis], name=y_axis, mode="lines"))
 
-        fig.show()
+        if file_path:
+            fig.write_image(f"{file_path}")
+        else:
+            fig.show()
 
-    def line_plot(self, data: dict, x_axis: str, y_axis: str) -> None:
+    def line_plot(self, data: dict, x_axis: str, y_axis: str, file_path: str = None) -> None:
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=data[x_axis], y=data[y_axis], name=y_axis, mode="lines"))
-        fig.show()
 
-    def multiline_and_multiscale_plot(self, data: dict, x_axis: str, first_y_axis: str, sec_y_axis: str) -> None:
-        fig = make_subplots(specs=[[{"secondary_y": True}]])
-        fig.add_trace(
-            go.Scatter(x=data[x_axis], y=data[first_y_axis], name=first_y_axis, mode="lines"), secondary_y=False
+        if file_path:
+            fig.write_image(f"{file_path}")
+        else:
+            fig.show()
+
+    def multiline_and_multiscale_plot(
+        self, data: dict, x_axis: str, y_axises: list, scales: list, file_path: str = None
+    ) -> None:
+        """
+        y_axises: list of objects {name: str, scale: int (primary or secondary)}
+        scales: list of 2 objects: first is the left and primary y axis {title: str, down: int, top: int},
+        """
+
+        if len(scales) > 2:
+            raise ValueError("Only two scales are supported")
+
+        fig = go.Figure()
+
+        for y_axis in y_axises:
+            if y_axis["scale"] == "primary":
+                fig.add_trace(
+                    go.Scatter(x=data[x_axis], y=data[y_axis["name"]], name=y_axis["name"], mode="lines", yaxis="y")
+                )
+            else:
+                fig.add_trace(
+                    go.Scatter(x=data[x_axis], y=data[y_axis["name"]], name=y_axis["name"], mode="lines", yaxis="y2")
+                )
+
+        fig.update_layout(
+            yaxis=dict(title=scales[0]["title"], range=[scales[0]["down"], scales[0]["top"]], side="left"),
+            yaxis2=dict(title=scales[1]["title"], range=[scales[1]["down"], scales[1]["top"]], side="right"),
         )
-        fig.add_trace(go.Scatter(x=data[x_axis], y=data[sec_y_axis], name=sec_y_axis, mode="lines"), secondary_y=True)
 
-        fig.update_yaxes(title_text=first_y_axis, secondary_y=False)
-        fig.update_yaxes(title_text=sec_y_axis, secondary_y=True)
-
-        fig.show()
+        if file_path:
+            fig.write_image(f"{file_path}")
+        else:
+            fig.show()
